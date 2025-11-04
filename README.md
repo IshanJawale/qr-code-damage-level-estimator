@@ -85,6 +85,66 @@ Typical T4 runtime (demo sizes): a few minutes. Larger datasets/epochs will incr
 - Slow I/O: Reduce dataset sizes or switch to `.jpg` with quality ~95 for faster writes.
 - CUDA OOM: Lower batch size or image size.
 
+## 🚀 Inference & Web Interface
+
+### Web Application
+A Flask-based web interface for easy QR code damage level prediction:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the web app
+python app.py
+```
+
+Open `http://127.0.0.1:5000` in your browser. Features:
+- **Upload Image**: Drag & drop or select QR code images
+- **Camera Capture**: Take photos directly using your device camera
+- **Real-time Results**: Get instant damage level predictions with confidence scores
+- **Detailed Analysis**: View probability distribution across all damage levels
+
+### Python API
+Use the inference module directly in your code:
+
+```python
+from inference import QRDamagePredictor
+
+# Initialize predictor
+predictor = QRDamagePredictor("model/qr_damage_best.pt")
+
+# Predict on an image
+result = predictor.predict_with_details("path/to/qr_code.png")
+print(f"Damage Level: {result['class_name']}")
+print(f"Confidence: {result['confidence']:.2%}")
+```
+
+### Batch Processing
+Process multiple images at once:
+
+```bash
+python batch_inference.py data/test -o results.csv
+```
+
+For detailed inference documentation, see [README_INFERENCE.md](README_INFERENCE.md).
+
+## 📁 Project Structure
+
+```
+qr-code-damage-level-estimator/
+├── model/
+│   └── qr_damage_best.pt        # Trained model weights
+├── data/                         # Training/validation/test datasets
+├── train/
+│   └── qr_damage_level_estimator.ipynb  # Training notebook
+├── templates/                    # Web interface HTML
+├── static/                       # CSS and assets
+├── inference.py                  # Core inference module
+├── app.py                       # Flask web application
+├── batch_inference.py           # Batch processing script
+└── requirements.txt             # Dependencies
+```
+
 ## License
 
 This project is provided as-is for educational and research use. Add your preferred license if you publish a repository.

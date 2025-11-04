@@ -37,3 +37,15 @@ pip-wheel-metadata/
 # Logs
 logs/
 *.log
+
+# Flask
+instance/
+.webassets-cache
+
+# Uploaded files
+uploads/
+*.csv
+
+# Model checkpoints (optional - remove if you want to track model files)
+# runs/
+# model/*.pt
