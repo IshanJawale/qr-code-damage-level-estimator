@@ -12,8 +12,10 @@ env/
 
 # Data folder (ignored)
 data/
+data_old/
 # also ignore absolute path at repo root
 /data/
+/data_old/
 
 # Jupyter
 .ipynb_checkpoints
